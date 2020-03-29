@@ -23,6 +23,7 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     screenLabel.text = "0"
   }
+  
   @IBAction func numberPressed(_ numberButton: UIButton) {
     pressedNumber=numberButton.currentTitle!
     ACButton.titleLabel!.text="C"
@@ -38,12 +39,19 @@ class ViewController: UIViewController {
       }else {
         screenLabel.text!+=pressedNumber //operasyondan sonra yanina sayi ekleme
       }
-      
+    }
+  }
+  
+  @IBAction func operationPressed(_ operationButton: UIButton) {
+    if operationButton.currentTitle == "+/-" {
+      screenLabel.text = String(Double(screenLabel.text!)! * -1.0)
+      return
+    }
+    if operationButton.currentTitle == "%" {
+      screenLabel.text = String(Double(screenLabel.text!)! / 100.0)
+      return
     }
     
-    
-  }
-  @IBAction func operationPressed(_ operationButton: UIButton) {
     // button border
     if previusPressedOperationButton != operationButton{
       previusPressedOperationButton?.layer.borderWidth=0
@@ -56,10 +64,10 @@ class ViewController: UIViewController {
         firstNumber=screenLabel.text!
         previusPressedOperationButton = operationButton
       }else { //ikinci operasyon
-        secondNumber=screenLabel.text!
         if operationButton.currentTitle == "=" { //if operationButton = ise previusPressedOperationButton ile
+          secondNumber=screenLabel.text!
           calculate(num1: firstNumber,num2: secondNumber,operation: previusPressedOperationButton.currentTitle!)
-        }else { //else (X - + ÷ %) ise operationButton ile yap
+        }else { //else (X - + ÷) ise operationButton ile yap
           calculate(num1: firstNumber,num2: secondNumber,operation: operationButton.currentTitle!)
           previusPressedOperationButton = operationButton
         }
@@ -92,17 +100,15 @@ class ViewController: UIViewController {
   }
   
   private func calculate(num1: String, num2: String, operation: String){
-    // operation-> (X - + ÷ %)
+    // operation-> (X - + ÷)
     if operation=="X" {
-      firstNumber = String(Double(firstNumber)! * Double(secondNumber)!)
+      firstNumber = String(Double(num1)! * Double(num2)!)
     }else if operation=="-" {
-      firstNumber = String(Double(firstNumber)! - Double(secondNumber)!)
+      firstNumber = String(Double(num1)! - Double(num2)!)
     }else if operation=="+" {
-      firstNumber = String(Double(firstNumber)! + Double(secondNumber)!)
+      firstNumber = String(Double(num1)! + Double(num2)!)
     }else if operation=="÷" {
-      firstNumber = String(Double(firstNumber)! / Double(secondNumber)!)
-    }else if operation=="%" {
-      firstNumber = String(Double(firstNumber)! / 100.0)
+      firstNumber = String(Double(num1)! / Double(num2)!)
     }else {
       //ERROR
       screenLabel.textColor=UIColor.red
