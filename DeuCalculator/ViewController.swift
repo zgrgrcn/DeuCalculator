@@ -20,11 +20,21 @@ class ViewController: UIViewController {
     var prevOperation: String=""
     var pressedNumber: String=""
     var isFirstNumber: Bool=true
+    var history = [String]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         screenLabel.text = "0"
+    }
+    
+    @IBAction func openHistory(_ sender: Any) {
+        performSegue(withIdentifier: "history", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.destination as! HistoryController
+        destination.historyList = self.history
     }
     
     @IBAction func buttonComma(_ sender: Any) {
@@ -89,8 +99,8 @@ class ViewController: UIViewController {
                 }else if(secondNumber.last == "."){
                     secondNumber += "0"
                 }
-                
                 calculate(num1: firstNumber, num2: secondNumber, operation: prevOperation)
+                
             }
             
             if(currentOperation != "="){
@@ -123,6 +133,9 @@ class ViewController: UIViewController {
     }
     
     private func calculate(num1: String, num2: String, operation: String){
+        history.append(firstNumber)
+        history.append(operation)
+        history.append(secondNumber)
         // operation-> (X - + ÷)
         if operation=="X" {
             firstNumber = String(Double(num1)! * Double(num2)!)
@@ -148,6 +161,8 @@ class ViewController: UIViewController {
         else{
             screenLabel.text = firstNumber.replacingOccurrences(of: ".", with: ",")
         }
+        history.append("=")
+        history.append(firstNumber)
         secondNumber = ""
     }
 }
