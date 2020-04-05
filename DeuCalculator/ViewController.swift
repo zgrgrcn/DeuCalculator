@@ -113,8 +113,12 @@ class ViewController: UIViewController {
   @IBAction func percentButtonPressed(_ sender: Any) {
     //firtnumber varsa seconNumber yoksa ekranda 0dan baska birsey varsa 100e bol
     if firstNumber != "" && secondNumber == "" {
+      history.append(firstNumber)
       screenLabel.text=String(Double(firstNumber)!/100).replacingOccurrences(of: ".", with: ",")
       firstNumber=screenLabel.text!.replacingOccurrences(of: ",", with: ".")
+      history.append("%")
+      history.append("=")
+      history.append(firstNumber)//degismis hali
     }
     if firstNumber != "" && secondNumber != "" && prevOperation != "" {
       calculate(num1: firstNumber, num2: secondNumber, operation: prevOperation)
