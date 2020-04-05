@@ -110,6 +110,18 @@ class ViewController: UIViewController {
     }
   }
   
+  @IBAction func percentButtonPressed(_ sender: Any) {
+    //firtnumber varsa seconNumber yoksa ekranda 0dan baska birsey varsa 100e bol
+    if firstNumber != "" && secondNumber == "" {
+      screenLabel.text=String(Double(firstNumber)!/100).replacingOccurrences(of: ".", with: ",")
+      firstNumber=screenLabel.text!.replacingOccurrences(of: ",", with: ".")
+    }
+    if firstNumber != "" && secondNumber != "" && prevOperation != "" {
+      calculate(num1: firstNumber, num2: secondNumber, operation: prevOperation)
+      screenLabel.text=String(Double(firstNumber)!/100).replacingOccurrences(of: ".", with: ",")
+      firstNumber=screenLabel.text!.replacingOccurrences(of: ",", with: ".")
+    }
+  }
   @IBAction func ACPressed(_ ACButton: UIButton) {
     if ACButton.currentTitle=="AC"{
       screenLabel.text = "0"
@@ -169,4 +181,5 @@ class ViewController: UIViewController {
     secondNumber = ""
   }
 }
+
 

@@ -69,7 +69,7 @@
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="operationPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AbD-aT-gkh"/>
+                                                            <action selector="percentButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IFx-fT-YbQ"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1LB-Bb-7t4">
