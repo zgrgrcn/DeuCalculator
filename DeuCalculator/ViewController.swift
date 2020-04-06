@@ -32,11 +32,11 @@ class ViewController: UIViewController, HistoryControllerDelegate {
   func clearNow(data: [String]) {
     self.history = data
     //clear sadece log ekranini sifirliyorsa bunlar olmayacak
-//    screenLabel.text = "0"
-//    firstNumber=""
-//    secondNumber=""
-//    pressedNumber=""
-//    isFirstNumber = true;
+    //    screenLabel.text = "0"
+    //    firstNumber=""
+    //    secondNumber=""
+    //    pressedNumber=""
+    //    isFirstNumber = true;
   }
   
   @IBAction func openHistory(_ sender: Any) {
@@ -140,7 +140,7 @@ class ViewController: UIViewController, HistoryControllerDelegate {
       firstNumber=screenLabel.text!.replacingOccurrences(of: ",", with: ".")
     }
   }
- 
+  
   @IBAction func ACPressed(_ ACButton: UIButton) {
     if ACButton.currentTitle=="AC"{
       screenLabel.text = "0"
@@ -210,13 +210,13 @@ class ViewController: UIViewController, HistoryControllerDelegate {
   
   //bu fonksiyonlar navigation barlari gizlemek icin
   override func viewWillAppear(_ animated: Bool) {
-      super.viewWillAppear(animated)
-      navigationController?.setNavigationBarHidden(true, animated: animated)
+    super.viewWillAppear(animated)
+    navigationController?.setNavigationBarHidden(true, animated: animated)
   }
-
+  
   override func viewWillDisappear(_ animated: Bool) {
-      super.viewWillDisappear(animated)
-      navigationController?.setNavigationBarHidden(false, animated: animated)
+    super.viewWillDisappear(animated)
+    navigationController?.setNavigationBarHidden(false, animated: animated)
   }
 }
 
