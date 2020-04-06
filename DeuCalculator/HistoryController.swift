@@ -8,15 +8,21 @@
 
 import UIKit
 
+protocol HistoryControllerDelegate : NSObjectProtocol{
+  func clearNow(data: [String])
+}
+
 class HistoryController: UIViewController {
   
+  weak var delegate : HistoryControllerDelegate?
   var historyList = [String]()
+  var empty = [String]()
   
   @IBOutlet var tableView: UITableView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    //navigationController?.hidesBarsOnSwipe = true
     tableView.dataSource = self
     tableView?.layer.borderWidth=2.0;
     tableView.layer.borderColor = UIColor.gray.cgColor
@@ -26,9 +32,13 @@ class HistoryController: UIViewController {
   @IBAction func clearHistory(_ sender: Any) {
     historyList=[]
     tableView.reloadData()
-//    let destination = segue.destination as! ViewController
-//    destination.history = []
+    if let delegate = delegate{
+      delegate.clearNow(data: empty)
+    }
   }
+  
+  
+  
   
 }
 

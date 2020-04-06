@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, HistoryControllerDelegate {
   
   @IBOutlet var holder: UIView!
   @IBOutlet weak var screenLabel: UILabel!
@@ -28,6 +28,16 @@ class ViewController: UIViewController {
     screenLabel.text = "0"
   }
   
+  func clearNow(data: [String]) {
+    self.history = data
+    //clear sadece log ekranini sifirliyorsa bunlar olmayacak
+//    screenLabel.text = "0"
+//    firstNumber=""
+//    secondNumber=""
+//    pressedNumber=""
+//    isFirstNumber = true;
+  }
+  
   @IBAction func openHistory(_ sender: Any) {
     performSegue(withIdentifier: "history", sender: self)
   }
@@ -35,6 +45,7 @@ class ViewController: UIViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     let destination = segue.destination as! HistoryController
     destination.historyList = self.history
+    destination.delegate = self
   }
   
   @IBAction func buttonComma(_ sender: Any) {
@@ -126,6 +137,7 @@ class ViewController: UIViewController {
       firstNumber=screenLabel.text!.replacingOccurrences(of: ",", with: ".")
     }
   }
+ 
   @IBAction func ACPressed(_ ACButton: UIButton) {
     if ACButton.currentTitle=="AC"{
       screenLabel.text = "0"
@@ -184,6 +196,9 @@ class ViewController: UIViewController {
     history.append(firstNumber)
     secondNumber = ""
   }
+  
+  
+  //bu fonksiyonlar navigation barlari gizlemek icin
   override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(animated)
       navigationController?.setNavigationBarHidden(true, animated: animated)
