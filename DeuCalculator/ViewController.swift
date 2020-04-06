@@ -26,6 +26,7 @@ class ViewController: UIViewController, HistoryControllerDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     screenLabel.text = "0"
+    screenLabel.adjustsFontForContentSizeCategory = true
   }
   
   func clearNow(data: [String]) {
@@ -82,6 +83,8 @@ class ViewController: UIViewController, HistoryControllerDelegate {
   }
   
   @IBAction func numberPressed(_ numberButton: UIButton) {
+    
+    screenLabelSize()
     //ACButton.titleLabel?.text="C"
     ACButton.setTitle("C", for: .normal)
     
@@ -145,8 +148,10 @@ class ViewController: UIViewController, HistoryControllerDelegate {
       secondNumber=""
       pressedNumber=""
       isFirstNumber = true;
+      screenLabel.font = screenLabel.font.withSize(60)
     }else if ACButton.currentTitle=="C"{
       screenLabel.text = "0"
+      screenLabel.font = screenLabel.font.withSize(60)
       ACButton.setTitle("AC", for: .normal)
       //debug sonucuna gore
       if secondNumber != "" {//seconNumber varsa firstNumber a
@@ -197,6 +202,11 @@ class ViewController: UIViewController, HistoryControllerDelegate {
     secondNumber = ""
   }
   
+  private func screenLabelSize(){
+    if screenLabel.text!.count > 10 {
+      screenLabel.font = screenLabel.font.withSize(CGFloat(600/(screenLabel.text!.count)))
+    }
+  }
   
   //bu fonksiyonlar navigation barlari gizlemek icin
   override func viewWillAppear(_ animated: Bool) {
